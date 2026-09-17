@@ -1036,6 +1036,7 @@ func NewServer(userConfig UserConfig, config Config) (*Server, error) {
 		SilenceVCSStatusNoProjects:     userConfig.SilenceVCSStatusNoProjects,
 		DisableAutoplan:                userConfig.DisableAutoplan,
 		DisableAutoplanLabel:           userConfig.DisableAutoplanLabel,
+		EnableAutoplanLabel:            userConfig.EnableAutoplanLabel,
 		Drainer:                        drainer,
 		PreWorkflowHooksCommandRunner:  preWorkflowHooksCommandRunner,
 		PostWorkflowHooksCommandRunner: postWorkflowHooksCommandRunner,
