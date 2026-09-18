@@ -63,7 +63,7 @@ jobs:
       attestations: write
     strategy:
       matrix:
-        image_type: [debian]
+        image_type: [alpine, debian]
     runs-on: ubuntu-24.04
     env:
       # Set docker repo to either the fork or the main repo where the branch exists
@@ -203,7 +203,7 @@ jobs:
       contents: read
     strategy:
       matrix:
-        image_type: [debian]
+        image_type: [alpine, debian]
         platform: [linux/arm64/v8, linux/amd64, linux/arm/v7]
     env:
       # Set docker repo to either the fork or the main repo where the branch exists
@@ -250,7 +250,7 @@ jobs:
       contents: read
     strategy:
       matrix:
-        image_type: [debian]
+        image_type: [alpine, debian]
     runs-on: ubuntu-24.04
     steps:
       - name: Harden Runner
@@ -259,3 +259,4 @@ jobs:
           egress-policy: audit
 
       - run: 'echo "No build required"'
+
