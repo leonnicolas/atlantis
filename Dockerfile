@@ -84,14 +84,14 @@ RUN groupadd --gid 1000 atlantis && \
 # We place this last as it will bust less docker layer caches when packages update
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    ca-certificates=${DEBIAN_CA_CERTIFICATES_VERSION} \
-    curl=${DEBIAN_CURL_VERSION} \
-    git=${DEBIAN_GIT_VERSION} \
-    unzip=${DEBIAN_UNZIP_VERSION} \
-    openssh-server=${DEBIAN_OPENSSH_SERVER_VERSION} \
-    dumb-init=${DEBIAN_DUMB_INIT_VERSION} \
-    gnupg=${DEBIAN_GNUPG_VERSION} \
-    openssl=${DEBIAN_OPENSSL_VERSION} && \
+    ca-certificates \
+    curl \
+    git \
+    unzip \
+    openssh-server \
+    dumb-init \
+    gnupg \
+    openssl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -289,7 +289,7 @@ ENV DEBIAN_LIBCAP2_BIN_VERSION="1:2.75-10+deb13u1+b1"
 # hadolint ignore=DL4006
 RUN fcap_scan_dirs="/bin /sbin /usr /opt /lib /lib64" && \
     apt-get update && \
-    apt-get install -y --no-install-recommends libcap2-bin=${DEBIAN_LIBCAP2_BIN_VERSION} && \
+    apt-get install -y --no-install-recommends libcap2-bin && \
     command -v getcap >/dev/null && command -v setcap >/dev/null && \
     for d in $fcap_scan_dirs; do \
         [ -d "$d" ] && getcap -r "$d" 2>/dev/null; \
