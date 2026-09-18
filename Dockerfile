@@ -41,7 +41,7 @@ WORKDIR /app
 ENV BUILDER_BASH_VERSION="5.3.9-r1"
 
 RUN apk add --no-cache \
-    bash=${BUILDER_BASH_VERSION}
+    bash
 
 COPY go.mod go.sum ./
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -213,15 +213,15 @@ ENV COREUTILS_ENV_VERSION="9.8-r1"
 # Install packages needed to run Atlantis.
 # We place this last as it will bust less docker layer caches when packages update
 RUN apk add --no-cache \
-    ca-certificates=${CA_CERTIFICATES_VERSION} \
-    curl=${CURL_VERSION} \
-    git=${GIT_VERSION} \
-    unzip=${UNZIP_VERSION} \
-    bash=${BASH_VERSION} \
-    openssh=${OPENSSH_VERSION} \
-    dumb-init=${DUMB_INIT_VERSION} \
-    gcompat=${GCOMPAT_VERSION} \
-    coreutils-env=${COREUTILS_ENV_VERSION}
+    ca-certificates \
+    curl \
+    git \
+    unzip \
+    bash \
+    openssh \
+    dumb-init \
+    gcompat \
+    coreutils-env
 
 # Strip file capabilities only under fcap_scan_dirs (common rootfs locations for
 # binaries and libs: /bin, /sbin, /usr, /opt, /lib, /lib64). This is a scoped
@@ -233,7 +233,7 @@ RUN apk add --no-cache \
 ENV LIBCAP_VERSION="2.78-r0"
 # hadolint ignore=DL4006
 RUN fcap_scan_dirs="/bin /sbin /usr /opt /lib /lib64" && \
-    apk add --no-cache libcap=${LIBCAP_VERSION} && \
+    apk add --no-cache libcap && \
     command -v getcap >/dev/null && command -v setcap >/dev/null && \
     for d in $fcap_scan_dirs; do \
         [ -d "$d" ] && getcap -r "$d" 2>/dev/null; \
